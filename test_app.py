@@ -28,6 +28,11 @@ def rows(db_path):
         return db.execute("SELECT name, email, major FROM signups").fetchall()
 
 
+def test_module_exposes_app_for_gunicorn():
+    import app as app_module
+    assert app_module.app.name == "app"
+
+
 def test_form_page_loads(client):
     response = client.get("/")
     assert response.status_code == 200

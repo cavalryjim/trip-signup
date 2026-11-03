@@ -57,3 +57,5 @@ def create_app(database="signups.db"):
         return render_template("admin.html", signups=signups)
 
     return app
+
+app = create_app()
