@@ -118,6 +118,20 @@ def test_admin_escapes_signup_data(admin_client):
     assert b"&lt;script&gt;" in resp.data
 
 
+def test_procfile_points_at_flask_app():
+    import importlib
+    from pathlib import Path
+
+    from flask import Flask
+
+    line = (Path(__file__).parent / "Procfile").read_text().strip()
+    assert line.startswith("web: gunicorn ")
+    target = line.split()[2]
+    module_name, attr = target.split(":")
+    module = importlib.import_module(module_name)
+    assert isinstance(getattr(module, attr), Flask)
+
+
 def test_invalid_email_is_rejected(client):
     c, db_path = client
     resp = c.post("/", data={"name": "Ada", "email": "not-an-email", "major": "Math"})
