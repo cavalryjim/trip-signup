@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h3 mb-3">Study Abroad Trip</h1>
+<p class="text-muted">Register your interest and we'll be in touch.</p>
+{% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+<form method="post" class="card card-body">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input id="name" name="name" class="form-control" value="{{ form.name or '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input id="email" name="email" type="email" class="form-control" value="{{ form.email or '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label for="major" class="form-label">Major</label>
+    <input id="major" name="major" class="form-control" value="{{ form.major or '' }}" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Register interest</button>
+</form>
+{% endblock %}

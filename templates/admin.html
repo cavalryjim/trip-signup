@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Signups · Admin{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Signups</h1>
+<p class="text-muted">{{ signups|length }} signup{{ "" if signups|length == 1 else "s" }}</p>
+{% if signups %}
+<div class="table-responsive card">
+  <table class="table table-striped mb-0">
+    <thead>
+      <tr><th>Name</th><th>Email</th><th>Major</th><th>Signed up</th></tr>
+    </thead>
+    <tbody>
+      {% for name, email, major, created_at in signups %}
+      <tr><td>{{ name }}</td><td>{{ email }}</td><td>{{ major }}</td><td>{{ created_at }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="alert alert-secondary">No signups yet.</div>
+{% endif %}
+{% endblock %}
