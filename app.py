@@ -46,6 +46,7 @@ def thanks():
 
 def admin_authorized():
     expected = os.environ.get("ADMIN_PASSWORD")
+    print(f"The expected password is {expected}")
     auth = request.authorization
     if not expected or auth is None or auth.password is None:
         return False
